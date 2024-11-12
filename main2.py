@@ -69,7 +69,7 @@ def loadData(filename):
                     continue
                 columns[i] = columns.get(i, []) + [row_vals[i]]
 
-    print(columns)
+    # print(columns)
     return header, data, field_guide, variables, columns
 
 
@@ -84,15 +84,15 @@ def QuesSimple(row):
     # del row["Type"]
 
     ques_types, ans_types = [], []
-    print("row", row)
-    print("fields", field_guide)
+    # print("row", row)
+    # print("fields", field_guide)
     for i in row.keys():
         if field_guide[i] == "ques":
             ques_types.append(i)
         elif field_guide[i] == "ans":
             ans_types.append(i)
 
-    print("ques and ans types", ques_types, ans_types)
+    # print("ques and ans types", ques_types, ans_types)
 
     # To clarify, the ques_type field is the field the value that is given belongs to and the ans_type represents the field that the value to be entered belongs to
     field1 = random.choice(ques_types)
@@ -193,13 +193,13 @@ def main():
     # Load Data
     global header, data, variables, field_guide, columns
     header, data, field_guide, variables, columns = loadData(module)
-    print(variables)
+    # print(variables)
 
     # Start Asking Questions
     questions = {"s": QuesSimple, "c": QuesComplex}
     # rand_row = random.choice(data)
     rand_row = data[-1]
-    print(rand_row)
+    # print(rand_row)
     if not rand_row["Type"] in questions.keys():
         raise TypeError("Unknown Type of question found. Please refer to the manual for the acceptable question types.")
     question_infos = questions[rand_row["Type"]](rand_row)
